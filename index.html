@@ -1,38 +1,200 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Lingua Pairs - the memory game that teaches you languages</title>
-<meta name="description" content="Lingua Pairs: flip, match and learn German, Spanish, French, Dutch and Hungarian words with photos, from A1 to C1.">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lingua Pairs: Learn Languages with a Memory Game</title>
+<meta name="description" content="Lingua Pairs is a free memory game for learning German, Spanish, French, Dutch, Hungarian and English words, with photos and spoken pronunciation.">
+<link rel="canonical" href="https://lingua.kalmarium.com/">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#F3EDE3">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lingua Pairs">
+<meta property="og:title" content="Lingua Pairs: Learn Languages with a Memory Game">
+<meta property="og:description" content="Lingua Pairs is a free memory game for learning German, Spanish, French, Dutch, Hungarian and English words, with photos and spoken pronunciation.">
+<meta property="og:url" content="https://lingua.kalmarium.com/">
+<meta property="og:image" content="https://lingua.kalmarium.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lingua Pairs, the memory game that teaches you languages: two friends holding cards in front of paper-cut landmarks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lingua Pairs: Learn Languages with a Memory Game">
+<meta name="twitter:description" content="Lingua Pairs is a free memory game for learning German, Spanish, French, Dutch, Hungarian and English words, with photos and spoken pronunciation.">
+<meta name="twitter:image" content="https://lingua.kalmarium.com/img/og.jpg">
 <style>
-  :root { --bg:#F3EDE3; --text:#151413; --muted:#6E675E; --card:#FFFFFF; --line:#DDD4C6; --accent:#F0553A; --link:#1F5FB8; }
+  :root { --bg:#F3EDE3; --text:#151413; --muted:#5F5850; --card:#FFFFFF; --line:#DDD4C6; --accent:#F0553A; --accent-text:#B8321B; --link:#1F5FB8; --btn:#151413; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#12110F; --text:#F3EDE3; --muted:#A79F93; --card:#1F1D1A; --line:#3A3631; --accent:#F0553A; --link:#7FB2F5; }
+    :root { --bg:#12110F; --text:#F3EDE3; --muted:#A79F93; --card:#1F1D1A; --line:#3A3631; --accent:#F0553A; --accent-text:#FF8A73; --link:#7FB2F5; }
   }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:32px 20px 64px; }
-  h1 { font-size:2.6rem; line-height:1.05; margin:0 0 6px; font-stretch:condensed; letter-spacing:-0.02em; }
+  main { max-width:760px; margin:0 auto; padding:32px 20px 24px; }
+  .brand { display:flex; align-items:center; gap:16px; }
+  .brand img { border-radius:22px; flex:none; }
+  h1 { font-size:2.3rem; line-height:1.05; margin:0; font-stretch:condensed; letter-spacing:-0.02em; }
   h1 span { color:var(--accent); }
-  h2 { font-size:1.2rem; margin:30px 0 6px; }
-  p.lead { color:var(--muted); margin:0 0 20px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:18px 20px; margin:16px 0; }
+  h1 small { display:block; font-size:1.05rem; font-weight:500; letter-spacing:0; line-height:1.3; margin-top:6px; color:var(--muted); }
+  h2 { font-size:1.3rem; margin:36px 0 8px; }
+  h3 { font-size:1.05rem; margin:0 0 4px; }
+  p.lead { font-size:1.1rem; margin:22px 0 18px; }
+  .play { display:inline-block; line-height:0; border-radius:8px; }
+  a:focus-visible, .shots:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .note { color:var(--muted); font-size:.92rem; margin:10px 0 0; }
   a { color:var(--link); }
-  footer { color:var(--muted); font-size:.9rem; margin-top:40px; }
+  .shots { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 20px 12px; margin:14px -20px 0; }
+  .shots img { scroll-snap-align:start; flex:none; width:190px; height:auto; border-radius:16px; border:1px solid var(--line); }
+  .grid { display:grid; gap:12px; grid-template-columns:1fr; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:16px 20px; }
+  .card p { margin:0; }
+  .card h3 { color:var(--accent-text); }
+  details { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:10px 18px; margin:10px 0; }
+  summary { cursor:pointer; font-weight:600; }
+  details p { margin:8px 0 2px; }
+  .more ul { padding-left:20px; margin-top:4px; }
+  footer { color:var(--muted); font-size:.9rem; margin-top:40px; border-top:1px solid var(--line); padding-top:18px; }
+  @media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } h1 { font-size:2.8rem; } .shots img { width:210px; } }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Lingua Pairs",
+  "alternateName": "Lingua Pairs: Learn Languages",
+  "description": "Memory card game for learning German, Spanish, French, Dutch, Hungarian and English vocabulary. Match a word with its translation and get a photo card with spoken pronunciation.",
+  "operatingSystem": "Android",
+  "applicationCategory": "EducationalApplication",
+  "inLanguage": [
+    "en",
+    "de",
+    "es",
+    "fr",
+    "hu"
+  ],
+  "url": "https://lingua.kalmarium.com/",
+  "installUrl": "https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero",
+  "image": "https://lingua.kalmarium.com/img/og.jpg",
+  "screenshot": [
+    "https://lingua.kalmarium.com/img/home.webp",
+    "https://lingua.kalmarium.com/img/board.webp",
+    "https://lingua.kalmarium.com/img/match.webp"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Kalmarium Services BV",
+    "url": "https://kalmarium.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which languages can I learn?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "German, Spanish, French, Dutch, Hungarian and English, in any pair. You pick the language you speak and the one you are learning, for example Hungarian to Spanish or French to English."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Lingua Pairs free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, it is free to play with a small banner ad at the bottom of the screen, never in the middle of a game. A single one-time purchase removes ads for good. There is no subscription."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account or an internet connection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No account and no sign-up. Your progress stays on your device. Word lists and photos are stored in the app, so solo games work offline. Ads and online tables with friends need a connection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use my own word lists?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can import Anki decks or any two-column word list and play them with the same cards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do the words and photos come from?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Word lists and translations were created with the help of AI and checked automatically. Photos come from Wikimedia Commons under free licences, with credits in the app under Settings. If you spot a mistake, write to us and we will fix it."
+      }
+    }
+  ]
+}
+</script>
+<script defer src="https://overwatch.kalmarium.com/h.js" data-app="lingua-pairs"></script>
 </head>
 <body>
 <main>
-<h1>Lingua <span>Pairs</span></h1>
-<p class="lead">The memory game that teaches you languages.</p>
-<div class="card">
-<p>Pick the language you speak and the one you want to learn. Flip two cards: one is in your language, one in the new one. Find the pair and the cards merge into one picture card with a photo, both words and the spoken pronunciation.</p>
-<p>Learn German, Spanish, French, Dutch, Hungarian or English in any combination, with more than 2,200 words per language, six levels from A1 to C1 and eighteen categories. The app is available in English, German, Spanish, French and Hungarian. Made for phones, tablets and foldables, in bright and dark mode, with online play for 2 to 4 friends.</p>
-<p>Word lists and translations were created with the help of AI and checked automatically. Spotted a mistake? Write to us.</p>
-</div>
-<p><a href="privacy-policy.html">Privacy policy</a> &middot; Contact: <a href="mailto:kalmariumservices@gmail.com">kalmariumservices@gmail.com</a></p>
-<footer>&copy; 2026 Kalmarium Services BV</footer>
+  <div class="brand">
+    <img src="img/icon.png" width="72" height="72" alt="Lingua Pairs app icon: a dark card and a light card with the letter A on a coral background">
+    <h1>Lingua <span>Pairs</span><small>The memory game that teaches you languages</small></h1>
+  </div>
+  <p class="lead">Instead of two identical cards, you match a word with its translation. Learn German, Spanish, French, Dutch, Hungarian or English with photos and spoken words, in short rounds that fit a coffee break.</p>
+  <a class="play" href="https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dhero" aria-label="Get it on Google Play" rel="noopener"><svg viewBox="0 0 180 54" width="180" height="54" role="img" aria-hidden="true" focusable="false"><rect x="0.5" y="0.5" width="179" height="53" rx="8" fill="#000" stroke="#a6a6a6"/><path d="M14 10 L14 44 L32 27 Z" fill="#00d26a"/><path d="M14 10 L32 27 L38 21 L20 11 Z" fill="#ffd400"/><path d="M14 44 L32 27 L38 33 L20 43 Z" fill="#ff3d57"/><path d="M38 21 L46 25.5 Q49 27 46 28.5 L38 33 L32 27 Z" fill="#3db8ff"/><text x="58" y="21" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="10" letter-spacing="1">GET IT ON</text><text x="58" y="41" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="600">Google Play</text></svg></a>
+  <p class="note">Free to play. Needs Android 8.0 or newer.</p>
+
+  <h2>How it works</h2>
+  <p>Pick the language you speak and the one you want to learn. Flip two cards: one is in your language, one in the new one. Find the pair and the two cards merge into one picture card with a photo, both words and the pronunciation. Seeing, reading and hearing a word together is what makes it stick.</p>
+  <div class="shots" tabindex="0" role="group" aria-label="Lingua Pairs screenshots">
+    <img src="img/welcome.webp" width="360" height="800" loading="lazy" alt="Lingua Pairs welcome screen: pick the language you speak and the language you are learning">
+    <img src="img/home.webp" width="360" height="800" loading="lazy" alt="Home screen of Lingua Pairs with levels from A1 beginner and a button to play with friends">
+    <img src="img/setup.webp" width="360" height="800" loading="lazy" alt="Game setup with card types, board size and the number of pairs">
+    <img src="img/board.webp" width="360" height="800" loading="lazy" alt="A memory board with face-down cards and one flipped photo card">
+    <img src="img/match.webp" width="360" height="800" loading="lazy" alt="A matched pair showing a photo of a flower with the German word die Blume and its English meaning">
+    <img src="img/result.webp" width="360" height="800" loading="lazy" alt="The result screen with three stars, pairs, moves, time and the words you matched">
+  </div>
+
+  <h2>What you get</h2>
+  <div class="grid">
+    <div class="card"><h3>Six languages, any pair</h3><p>Learn German, Spanish, French, Dutch, Hungarian or English in any combination, such as English to German or Hungarian to Spanish. The app itself speaks English, German, Spanish, French and Hungarian and follows your phone&#x27;s language.</p></div>
+    <div class="card"><h3>Match a word with its translation</h3><p>Flip two cards: one in your language, one in the new one. When you find the pair, the cards merge into one picture card with a real photo, both words and the spoken word, using the voices on your phone.</p></div>
+    <div class="card"><h3>Three ways to play the cards</h3><p>Match word with word, photo with the new word, or your own word with a photo. Know a word already? Tap I know this and it stays out of your games for as long as you choose.</p></div>
+    <div class="card"><h3>Your words, your levels</h3><p>More than 2,200 words per language, six levels from A1 to C1 and eighteen categories. Build your own mix, see nouns with their articles, and import your own Anki decks or any two-column word list.</p></div>
+    <div class="card"><h3>Opposites and synonyms</h3><p>Match two words of the language you are learning that mean the opposite or nearly the same. Each card shows the word and its meaning in your own language underneath.</p></div>
+    <div class="card"><h3>For every screen, alone or with friends</h3><p>Bigger screens fit bigger boards, up to 28 pairs, in bright and dark mode on phones, tablets and foldables. Earn up to three stars per board, keep a daily streak, or play online with 2 to 4 friends at one table.</p></div>
+  </div>
+
+  <h2>Questions and answers</h2>
+  <details><summary>Which languages can I learn?</summary><p>German, Spanish, French, Dutch, Hungarian and English, in any pair. You pick the language you speak and the one you are learning, for example Hungarian to Spanish or French to English.</p></details>
+  <details><summary>Is Lingua Pairs free?</summary><p>Yes, it is free to play with a small banner ad at the bottom of the screen, never in the middle of a game. A single one-time purchase removes ads for good. There is no subscription.</p></details>
+  <details><summary>Do I need an account or an internet connection?</summary><p>No account and no sign-up. Your progress stays on your device. Word lists and photos are stored in the app, so solo games work offline. Ads and online tables with friends need a connection.</p></details>
+  <details><summary>Can I use my own word lists?</summary><p>Yes. You can import Anki decks or any two-column word list and play them with the same cards.</p></details>
+  <details><summary>Where do the words and photos come from?</summary><p>Word lists and translations were created with the help of AI and checked automatically. Photos come from Wikimedia Commons under free licences, with credits in the app under Settings. If you spot a mistake, write to us and we will fix it.</p></details>
+
+  <h2>Privacy and contact</h2>
+  <p>Read the <a href="privacy-policy.html">privacy policy</a>. Questions, ideas or a mistake in a word list? Email <a href="mailto:kalmariumservices@gmail.com">kalmariumservices@gmail.com</a>.</p>
+  <section class="more" aria-labelledby="more-h">
+  <h2 id="more-h">More from Kalmarium</h2>
+  <ul>
+    <li><a href="https://knowdrop.kalmarium.com/">Knowdrop</a> - daily trivia quiz</li>
+    <li><a href="https://netcheck.kalmarium.com/">Ultimate Network Troubleshooter</a> - Wi-Fi and network analyzer</li>
+    <li><a href="https://prep4cert.kalmarium.com/">Prep 4 Cert</a> - Microsoft exam practice</li>
+    <li><a href="https://tankageddon.kalmarium.com/">Tankageddon</a> - offline tank shooter</li>
+    <li><a href="https://crackafold.kalmarium.com/">Crack A Fold</a> - foldable screen prank</li>
+  </ul>
+  <p><a href="https://kalmarium.com">kalmarium.com</a> - all apps by Kalmarium Services BV</p>
+</section>
+  <footer>&copy; 2026 Kalmarium Services BV. Google Play and the Google Play logo are trademarks of Google LLC.</footer>
 </main>
 </body>
 </html>
