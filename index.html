@@ -3,24 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lingua Pairs: Learn Languages with a Memory Game</title>
-<meta name="description" content="Lingua Pairs is a free memory game for learning German, Spanish, French, Dutch, Hungarian and English words, with photos and spoken pronunciation.">
+<title>Lingua Pairs: Learn Languages with a Word Memory Game</title>
+<meta name="description" content="Lingua Pairs is a memory game for learning German, Spanish, French, Dutch, Hungarian and English words: match a word with its translation, a photo and audio.">
 <link rel="canonical" href="https://lingua.kalmarium.com/">
-<link rel="icon" type="image/png" href="img/icon.png">
-<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="alternate" hreflang="en" href="https://lingua.kalmarium.com/">
+<link rel="alternate" hreflang="de" href="https://lingua.kalmarium.com/de/">
+<link rel="alternate" hreflang="es" href="https://lingua.kalmarium.com/es/">
+<link rel="alternate" hreflang="fr" href="https://lingua.kalmarium.com/fr/">
+<link rel="alternate" hreflang="hu" href="https://lingua.kalmarium.com/hu/">
+<link rel="alternate" hreflang="nl" href="https://lingua.kalmarium.com/nl/">
+<link rel="alternate" hreflang="x-default" href="https://lingua.kalmarium.com/">
+<link rel="icon" type="image/png" href="/img/icon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <meta name="theme-color" content="#F3EDE3">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lingua Pairs">
-<meta property="og:title" content="Lingua Pairs: Learn Languages with a Memory Game">
-<meta property="og:description" content="Lingua Pairs is a free memory game for learning German, Spanish, French, Dutch, Hungarian and English words, with photos and spoken pronunciation.">
+<meta property="og:title" content="Lingua Pairs: Learn Languages with a Word Memory Game">
+<meta property="og:description" content="Lingua Pairs is a memory game for learning German, Spanish, French, Dutch, Hungarian and English words: match a word with its translation, a photo and audio.">
 <meta property="og:url" content="https://lingua.kalmarium.com/">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://lingua.kalmarium.com/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Lingua Pairs, the memory game that teaches you languages: two friends holding cards in front of paper-cut landmarks">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lingua Pairs: Learn Languages with a Memory Game">
-<meta name="twitter:description" content="Lingua Pairs is a free memory game for learning German, Spanish, French, Dutch, Hungarian and English words, with photos and spoken pronunciation.">
+<meta name="twitter:title" content="Lingua Pairs: Learn Languages with a Word Memory Game">
+<meta name="twitter:description" content="Lingua Pairs is a memory game for learning German, Spanish, French, Dutch, Hungarian and English words: match a word with its translation, a photo and audio.">
 <meta name="twitter:image" content="https://lingua.kalmarium.com/img/og.jpg">
 <style>
   :root { --bg:#F3EDE3; --text:#151413; --muted:#5F5850; --card:#FFFFFF; --line:#DDD4C6; --accent:#F0553A; --accent-text:#B8321B; --link:#1F5FB8; --btn:#151413; }
@@ -32,6 +40,9 @@
   main { max-width:760px; margin:0 auto; padding:32px 20px 24px; }
   .brand { display:flex; align-items:center; gap:16px; }
   .brand img { border-radius:22px; flex:none; }
+  .brandname { font-size:1.6rem; font-weight:700; line-height:1.1; margin:0; font-stretch:condensed; letter-spacing:-0.02em; }
+  .brandname span { color:var(--accent); }
+  .byline { display:block; font-size:.85rem; font-weight:500; letter-spacing:0; margin-top:4px; color:var(--muted); }
   h1 { font-size:2.3rem; line-height:1.05; margin:0; font-stretch:condensed; letter-spacing:-0.02em; }
   h1 span { color:var(--accent); }
   h1 small { display:block; font-size:1.05rem; font-weight:500; letter-spacing:0; line-height:1.3; margin-top:6px; color:var(--muted); }
@@ -39,9 +50,14 @@
   h3 { font-size:1.05rem; margin:0 0 4px; }
   p.lead { font-size:1.1rem; margin:22px 0 18px; }
   .play { display:inline-block; line-height:0; border-radius:8px; }
+  .play-badge { display:inline-block; line-height:0; }
+  .play-text { display:inline-block; background:var(--btn); color:#fff; font-weight:600; text-decoration:none; padding:12px 22px; border-radius:10px; min-height:44px; }
   a:focus-visible, .shots:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
   .note { color:var(--muted); font-size:.92rem; margin:10px 0 0; }
   a { color:var(--link); }
+  .langs { display:flex; flex-wrap:wrap; gap:4px 16px; list-style:none; margin:0 0 22px; padding:0; font-size:.92rem; }
+  .langs a { display:inline-block; padding:6px 0; }
+  .langs a[aria-current] { color:var(--text); font-weight:700; text-decoration:none; }
   .shots { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 20px 12px; margin:14px -20px 0; }
   .shots img { scroll-snap-align:start; flex:none; width:190px; height:auto; border-radius:16px; border:1px solid var(--line); }
   .grid { display:grid; gap:12px; grid-template-columns:1fr; }
@@ -52,6 +68,17 @@
   summary { cursor:pointer; font-weight:600; }
   details p { margin:8px 0 2px; }
   .more ul { padding-left:20px; margin-top:4px; }
+  .crumbs { font-size:.92rem; color:var(--muted); margin:16px 0 14px; }
+  .brand + h1 { margin-top:18px; }
+  table.pairs { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  table.pairs th, table.pairs td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--line); font-size:.98rem; }
+  table.pairs th { color:var(--muted); font-weight:600; font-size:.88rem; }
+  figure.cardshot { margin:18px 0 6px; }
+  figure.cardshot img { width:190px; height:auto; border-radius:16px; border:1px solid var(--line); display:block; }
+  figcaption { color:var(--muted); font-size:.9rem; margin-top:6px; }
+  .cta2 { margin:30px 0 0; padding:18px 20px; background:var(--card); border:1px solid var(--line); border-radius:20px; }
+  .cta2 p { margin:0 0 12px; font-weight:600; }
+  ul.sib { padding-left:20px; }
   footer { color:var(--muted); font-size:.9rem; margin-top:40px; border-top:1px solid var(--line); padding-top:18px; }
   @media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } h1 { font-size:2.8rem; } .shots img { width:210px; } }
 </style>
@@ -59,18 +86,16 @@
 {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
+  "@id": "https://lingua.kalmarium.com/#app",
   "name": "Lingua Pairs",
-  "alternateName": "Lingua Pairs: Learn Languages",
+  "alternateName": [
+    "Lingua Pairs: Learn Languages",
+    "Lingua Pairs: Word Memory Game"
+  ],
   "description": "Memory card game for learning German, Spanish, French, Dutch, Hungarian and English vocabulary. Match a word with its translation and get a photo card with spoken pronunciation.",
   "operatingSystem": "Android",
   "applicationCategory": "EducationalApplication",
-  "inLanguage": [
-    "en",
-    "de",
-    "es",
-    "fr",
-    "hu"
-  ],
+  "inLanguage": "en",
   "url": "https://lingua.kalmarium.com/",
   "installUrl": "https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero",
   "downloadUrl": "https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&referrer=utm_source%3Dwebsite%26utm_medium%3Dhero",
@@ -100,7 +125,7 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Which languages can I learn?",
+      "name": "Which languages can I learn with Lingua Pairs?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "German, Spanish, French, Dutch, Hungarian and English, in any pair. You pick the language you speak and the one you are learning, for example Hungarian to Spanish or French to English."
@@ -108,26 +133,34 @@
     },
     {
       "@type": "Question",
+      "name": "How does a memory game help me learn words?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You do not match identical cards. You match a word with its translation, and the pair turns into a picture card with a photo, both words and the spoken word. Seeing, reading and hearing the word together helps it stick, and short rounds make it easy to practise every day."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Is Lingua Pairs free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, it is free to play with a small banner ad at the bottom of the screen, never in the middle of a game. A single one-time purchase removes ads for good. There is no subscription."
+        "text": "It is free to play with a small banner ad at the bottom of the screen, never in the middle of a game. One purchase removes the ads for good. There is no subscription."
       }
     },
     {
       "@type": "Question",
-      "name": "Do I need an account or an internet connection?",
+      "name": "Which levels and how many words are there?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No account and no sign-up. Your progress stays on your device. Word lists and photos are stored in the app, so solo games work offline. Ads and online tables with friends need a connection."
+        "text": "Six levels (A1, A2, A2+, B1, B2 and C1) with over 2,200 words in every language, in eighteen categories. You can also build your own mix of levels and categories."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use my own word lists?",
+      "name": "Can I play with friends?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. You can import Anki decks or any two-column word list and play them with the same cards."
+        "text": "Yes. Online tables are for 2 to 4 players who take turns at one board. Solo games work offline; online tables and ads need a connection."
       }
     },
     {
@@ -145,44 +178,52 @@
 </head>
 <body>
 <main>
+  <nav aria-label="Language"><ul class="langs"><li><a href="/" lang="en" hreflang="en" aria-current="page">English</a></li><li><a href="/de/" lang="de" hreflang="de">Deutsch</a></li><li><a href="/es/" lang="es" hreflang="es">Español</a></li><li><a href="/fr/" lang="fr" hreflang="fr">Français</a></li><li><a href="/hu/" lang="hu" hreflang="hu">Magyar</a></li><li><a href="/nl/" lang="nl" hreflang="nl">Nederlands</a></li></ul></nav>
   <div class="brand">
-    <img src="img/icon.png" width="72" height="72" alt="Lingua Pairs app icon: a dark card and a light card with the letter A on a coral background">
-    <h1>Lingua <span>Pairs</span><small>The memory game that teaches you languages</small></h1>
+    <img src="/img/icon.png" width="72" height="72" alt="Lingua Pairs app icon: a dark card and a light card with the letter A on a coral background">
+    <h1>Lingua <span>Pairs</span> <small>The word memory game that teaches you languages</small></h1>
   </div>
   <p class="lead">Instead of two identical cards, you match a word with its translation. Learn German, Spanish, French, Dutch, Hungarian or English with photos and spoken words, in short rounds that fit a coffee break.</p>
-  <a class="play" href="https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dhero" aria-label="Get it on Google Play" rel="noopener"><svg viewBox="0 0 180 54" width="180" height="54" role="img" aria-hidden="true" focusable="false"><rect x="0.5" y="0.5" width="179" height="53" rx="8" fill="#000" stroke="#a6a6a6"/><path d="M14 10 L14 44 L32 27 Z" fill="#00d26a"/><path d="M14 10 L32 27 L38 21 L20 11 Z" fill="#ffd400"/><path d="M14 44 L32 27 L38 33 L20 43 Z" fill="#ff3d57"/><path d="M38 21 L46 25.5 Q49 27 46 28.5 L38 33 L32 27 Z" fill="#3db8ff"/><text x="58" y="21" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="10" letter-spacing="1">GET IT ON</text><text x="58" y="41" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="600">Google Play</text></svg></a>
+  <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dhero" rel="noopener" aria-label="Get it on Google Play: Lingua Pairs"><img src="/img/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" style="width:200px;height:auto"></a>
   <p class="note">Free to play. Needs Android 8.0 or newer.</p>
 
   <h2>How it works</h2>
   <p>Pick the language you speak and the one you want to learn. Flip two cards: one is in your language, one in the new one. Find the pair and the two cards merge into one picture card with a photo, both words and the pronunciation. Seeing, reading and hearing a word together is what makes it stick.</p>
   <div class="shots" tabindex="0" role="group" aria-label="Lingua Pairs screenshots">
-    <img src="img/welcome.webp" width="360" height="800" loading="lazy" alt="Lingua Pairs welcome screen: pick the language you speak and the language you are learning">
-    <img src="img/home.webp" width="360" height="800" loading="lazy" alt="Home screen of Lingua Pairs with levels from A1 beginner and a button to play with friends">
-    <img src="img/setup.webp" width="360" height="800" loading="lazy" alt="Game setup with card types, board size and the number of pairs">
-    <img src="img/board.webp" width="360" height="800" loading="lazy" alt="A memory board with face-down cards and one flipped photo card">
-    <img src="img/match.webp" width="360" height="800" loading="lazy" alt="A matched pair showing a photo of a flower with the German word die Blume and its English meaning">
-    <img src="img/result.webp" width="360" height="800" loading="lazy" alt="The result screen with three stars, pairs, moves, time and the words you matched">
+    <img src="/img/welcome.webp" width="360" height="800" loading="lazy" alt="Lingua Pairs welcome screen: pick the language you speak and the language you are learning">
+    <img src="/img/home.webp" width="360" height="800" loading="lazy" alt="Home screen of Lingua Pairs with levels from A1 beginner and a button to play with friends">
+    <img src="/img/setup.webp" width="360" height="800" loading="lazy" alt="Game setup with card types, board size and the number of pairs">
+    <img src="/img/board.webp" width="360" height="800" loading="lazy" alt="A memory board with face-down cards and one flipped photo card">
+    <img src="/img/match.webp" width="360" height="800" loading="lazy" alt="A matched pair showing a photo of a flower with the German word die Blume and its English meaning">
+    <img src="/img/result.webp" width="360" height="800" loading="lazy" alt="The result screen with three stars, pairs, moves, time and the words you matched">
   </div>
 
   <h2>What you get</h2>
   <div class="grid">
-    <div class="card"><h3>Six languages, any pair</h3><p>Learn German, Spanish, French, Dutch, Hungarian or English in any combination, such as English to German or Hungarian to Spanish. The app itself speaks English, German, Spanish, French and Hungarian and follows your phone&#x27;s language.</p></div>
+    <div class="card"><h3>Six languages, any pair</h3><p>Learn German, Spanish, French, Dutch, Hungarian or English in any combination, such as English to German or Hungarian to Spanish. The app itself speaks English, German, Spanish, French and Hungarian and follows your phone's language.</p></div>
     <div class="card"><h3>Match a word with its translation</h3><p>Flip two cards: one in your language, one in the new one. When you find the pair, the cards merge into one picture card with a real photo, both words and the spoken word, using the voices on your phone.</p></div>
     <div class="card"><h3>Three ways to play the cards</h3><p>Match word with word, photo with the new word, or your own word with a photo. Know a word already? Tap I know this and it stays out of your games for as long as you choose.</p></div>
     <div class="card"><h3>Your words, your levels</h3><p>More than 2,200 words per language, six levels from A1 to C1 and eighteen categories. Build your own mix, see nouns with their articles, and import your own Anki decks or any two-column word list.</p></div>
     <div class="card"><h3>Opposites and synonyms</h3><p>Match two words of the language you are learning that mean the opposite or nearly the same. Each card shows the word and its meaning in your own language underneath.</p></div>
     <div class="card"><h3>For every screen, alone or with friends</h3><p>Bigger screens fit bigger boards, up to 28 pairs, in bright and dark mode on phones, tablets and foldables. Earn up to three stars per board, keep a daily streak, or play online with 2 to 4 friends at one table.</p></div>
   </div>
+  <h2>Learn words in one language</h2>
+  <p>One page for each language you can learn in Lingua Pairs, with example word pairs from the app:</p>
+  <ul class="sib"><li><a href="/learn-german-words/">Learn German words</a></li><li><a href="/learn-spanish-words/">Learn Spanish words</a></li><li><a href="/learn-french-words/">Learn French words</a></li><li><a href="/learn-dutch-words/">Learn Dutch words</a></li><li><a href="/learn-hungarian-words/">Learn Hungarian words</a></li><li><a href="/learn-english-words/">Learn English words</a></li></ul>
 
   <h2>Questions and answers</h2>
-  <details><summary>Which languages can I learn?</summary><p>German, Spanish, French, Dutch, Hungarian and English, in any pair. You pick the language you speak and the one you are learning, for example Hungarian to Spanish or French to English.</p></details>
-  <details><summary>Is Lingua Pairs free?</summary><p>Yes, it is free to play with a small banner ad at the bottom of the screen, never in the middle of a game. A single one-time purchase removes ads for good. There is no subscription.</p></details>
-  <details><summary>Do I need an account or an internet connection?</summary><p>No account and no sign-up. Your progress stays on your device. Word lists and photos are stored in the app, so solo games work offline. Ads and online tables with friends need a connection.</p></details>
-  <details><summary>Can I use my own word lists?</summary><p>Yes. You can import Anki decks or any two-column word list and play them with the same cards.</p></details>
+  <details><summary>Which languages can I learn with Lingua Pairs?</summary><p>German, Spanish, French, Dutch, Hungarian and English, in any pair. You pick the language you speak and the one you are learning, for example Hungarian to Spanish or French to English.</p></details>
+  <details><summary>How does a memory game help me learn words?</summary><p>You do not match identical cards. You match a word with its translation, and the pair turns into a picture card with a photo, both words and the spoken word. Seeing, reading and hearing the word together helps it stick, and short rounds make it easy to practise every day.</p></details>
+  <details><summary>Is Lingua Pairs free?</summary><p>It is free to play with a small banner ad at the bottom of the screen, never in the middle of a game. One purchase removes the ads for good. There is no subscription.</p></details>
+  <details><summary>Which levels and how many words are there?</summary><p>Six levels (A1, A2, A2+, B1, B2 and C1) with over 2,200 words in every language, in eighteen categories. You can also build your own mix of levels and categories.</p></details>
+  <details><summary>Can I play with friends?</summary><p>Yes. Online tables are for 2 to 4 players who take turns at one board. Solo games work offline; online tables and ads need a connection.</p></details>
   <details><summary>Where do the words and photos come from?</summary><p>Word lists and translations were created with the help of AI and checked automatically. Photos come from Wikimedia Commons under free licences, with credits in the app under Settings. If you spot a mistake, write to us and we will fix it.</p></details>
 
+  <div class="cta2"><p>Ready to play? Get Lingua Pairs on Google Play.</p><a class="play-badge" href="https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dbottom" rel="noopener" aria-label="Get it on Google Play: Lingua Pairs"><img src="/img/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" style="width:200px;height:auto"></a></div>
+  <p class="note">If you like Lingua Pairs, try <a href="https://bilingua.kalmarium.com/?utm_source=lingua-pairs&amp;utm_medium=related">Bilingua Reader: bilingual EPUB and PDF reader</a>.</p>
+
   <h2>Privacy and contact</h2>
-  <p>Read the <a href="privacy-policy.html">privacy policy</a>. Questions, ideas or a mistake in a word list? Email <a href="mailto:kalmariumservices@gmail.com">kalmariumservices@gmail.com</a>.</p>
+  <p>Read the <a href="/privacy-policy.html">privacy policy</a>. Questions, ideas or a mistake in a word list? Email <a href="mailto:kalmariumservices@gmail.com">kalmariumservices@gmail.com</a>.</p>
   <section class="more" aria-labelledby="more-h">
   <h2 id="more-h">More from Kalmarium</h2>
   <ul>
@@ -198,6 +239,7 @@
   </ul>
   <p><a href="https://kalmarium.com">kalmarium.com</a> - Kalmarium Services BV, the studio</p>
 </section>
+  <p class="note"><a href="https://play.google.com/store/apps/details?id=com.kalmarium.linguapairs&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dfooter" rel="noopener">Get Lingua Pairs on Google Play</a></p>
   <footer>&copy; 2026 Kalmarium Services BV. Google Play and the Google Play logo are trademarks of Google LLC.</footer>
 </main>
 </body>
